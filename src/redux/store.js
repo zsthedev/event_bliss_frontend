@@ -3,6 +3,7 @@ import { authReducer } from "./reducer/authReducer";
 import { menuReducer } from "./reducer/menuReducer";
 import { eventReducer } from "./reducer/eventReducer";
 import { decorReducer } from "./reducer/decorReducer";
+import { requestReducer } from "./reducer/requestReducer";
 
 
 export const store = configureStore({
@@ -11,6 +12,7 @@ export const store = configureStore({
     menu: menuReducer,
     event: eventReducer,
     decor: decorReducer,
+    requests: requestReducer,
   },
 });
 export const server = "https://event-bliss-backend.onrender.com/api/v1";

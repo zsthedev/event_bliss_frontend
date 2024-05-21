@@ -48,7 +48,7 @@ const Menu = () => {
           ))}
         </div>
 
-        <div className="food-row flex items-center gap-3">
+        <div className="food-row flex items-center gap-5 flex-wrap justify-between">
           {menu && menu.length > 0
             ? menu
                 .filter((f) => (active === "all" || f.category === active) && f.name.toLowerCase().includes(searchTerm.toLowerCase()))

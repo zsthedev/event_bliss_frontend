@@ -25,6 +25,8 @@ import AdminDecors from "./pages/admin/Decors/AdminDecor";
 import CreateDecor from "./pages/admin/Decors/CreateDecor";
 import { updateDecor } from "./redux/actions/decor";
 import UpdatDecor from "./pages/admin/Decors/UpdateDecor";
+import BookEvent from "./pages/BookEvent";
+import ClientEvents from "./pages/ClientEvents";
 const App = () => {
   const locomotiveScroll = new LocomotiveScroll();
   const { loading, isAuthenticated, error, message, user } = useSelector(
@@ -99,6 +101,47 @@ const App = () => {
           }
         ></Route>
 
+        <Route
+          path="/book_event"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              redirect={"/login"}
+            >
+              <Sidebar
+                navList={
+                  isAuthenticated && user.role === "user"
+                    ? userRoutes
+                    : adminRoutes
+                }
+                component={BookEvent}
+                isAuthenticated={isAuthenticated}
+                user={user}
+              />
+            </ProtectedRoute>
+          }
+        ></Route>
+
+        <Route
+          path="/client_events"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              redirect={"/login"}
+            >
+              <Sidebar
+                navList={
+                  isAuthenticated && user.role === "user"
+                    ? userRoutes
+                    : adminRoutes
+                }
+                component={ClientEvents}
+                isAuthenticated={isAuthenticated}
+                user={user}
+              />
+            </ProtectedRoute>
+          }
+        ></Route>
         <Route
           path="/admin/food"
           element={

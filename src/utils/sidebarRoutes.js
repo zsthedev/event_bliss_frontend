@@ -5,6 +5,11 @@ export const userRoutes = [
     label: "Profile",
     value: "/profile",
   },
+
+  {
+    label: "Events",
+    value: "/client_events",
+  },
 ];
 
 export const adminRoutes = [
