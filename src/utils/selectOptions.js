@@ -5,3 +5,19 @@ export const userRoles = [
   },
   { value: "vendor", label: "Vendor" },
 ];
+
+export const filterFoodRow = [
+  {
+    value: "all",
+    label: "All",
+  },
+  {
+    value: "appetizer",
+    label: "Appetizers",
+  },
+
+  {
+    value: "main_course",
+    label: "Main Course",
+  },
+];

@@ -15,20 +15,21 @@ const Sidebar = ({ navList, component: Component, user, isAuthenticated }) => {
   const dispatch = useDispatch();
   const clickHandler = (e) => {
     e.preventDefault();
-    dispatch(logout())
+    dispatch(logout());
   };
   return (
     <div className="sidebar flex justify-between items-center">
       <div className="w-[15%] h-screen p-[30px] sticky top-0 left-0">
-        <p className="logo text-3xl font-flv text-black font-[500] pt-[50px] mb-8">
+        <p className="logo text-3xl font-flv text-black font-[500] pt-[30px] mb-8">
           Event<span className="font-flv text-crimson">Bliss</span>
         </p>
 
-        <div className="nav-items flex flex-col">
+        <div className="nav-items flex flex-col gap-5">
           {navList &&
             navList.length > 0 &&
             navList.map((n) => (
               <Link
+                to={n.value}
                 className={`text-gray ${
                   isActive(n.value)
                     ? "bg-crimson text-white w-[full] p-2 rounded-md"

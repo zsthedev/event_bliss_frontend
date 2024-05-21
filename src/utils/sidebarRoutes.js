@@ -6,3 +6,16 @@ export const userRoutes = [
     value: "/profile",
   },
 ];
+
+export const adminRoutes = [
+    {
+      label: "Profile",
+      value: "/profile",
+    },
+
+    {
+        label: "Food Items",
+        value: "/admin/food",
+      },
+    
+  ];

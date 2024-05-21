@@ -19,14 +19,53 @@
   font-family: "Poppins";
 }
 
-.content{
+.content {
   @apply w-[95%] h-full max-w-[1920px];
 }
 
-h2{
-  @apply text-4xl font-flv text-black font-[500]
+h2 {
+  @apply text-4xl font-flv text-black font-[500];
 }
 
-input{
-  @apply p-3 w-full bg-light_bg rounded-md outline-none
+input {
+  @apply p-3 w-full bg-light_bg rounded-md outline-none;
+}
+
+.flex_section {
+  @apply w-full min-h-screen flex justify-center mt-[120px];
+}
+
+table {
+  width: 100%;
+
+  padding: 20px;
+  border-radius: 5px;
+  overflow: hidden;
+
+  thead {
+  }
+
+  th {
+    @apply font-[400] text-white bg-crimson text-left px-5 py-2;
+  }
+
+  tr {
+    width: 100%;
+    background-color: white;
+    position: relative;
+  }
+  td {
+    @apply bg-white px-5 py-2 mb-2 border-b border-r border-b-light_bg border-r-light_bg min-h-full;
+  }
+
+  .actions {
+    a,
+    button {
+      @apply bg-black w-[100px] px-2 py-1 inline-block text-center text-sm text-white rounded-md;
+    }
+
+    .del {
+      @apply bg-crimson;
+    }
+  }
 }
