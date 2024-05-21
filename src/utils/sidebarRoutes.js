@@ -8,14 +8,18 @@ export const userRoutes = [
 ];
 
 export const adminRoutes = [
-    {
-      label: "Profile",
-      value: "/profile",
-    },
+  {
+    label: "Profile",
+    value: "/profile",
+  },
 
-    {
-        label: "Food Items",
-        value: "/admin/food",
-      },
-    
-  ];
+  {
+    label: "Food Items",
+    value: "/admin/food",
+  },
+
+  {
+    label: "Events",
+    value: "/admin/events",
+  },
+];

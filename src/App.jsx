@@ -17,6 +17,10 @@ import Menu from "./pages/Menu";
 import FoodItems from "./pages/admin/FoodItems";
 import CreateFood from "./pages/admin/CreateFood";
 import UpdateFood from "./pages/admin/UpdateFood";
+import AdminEvents from "./pages/admin/Events/AdminEvents";
+import CreateEvent from "./pages/admin/Events/CreateEvent";
+import { updateEvent } from "./redux/actions/events";
+import UpdatEvent from "./pages/admin/Events/UpdateEvent";
 const App = () => {
   const locomotiveScroll = new LocomotiveScroll();
   const { loading, isAuthenticated, error, message, user } = useSelector(
@@ -141,6 +145,66 @@ const App = () => {
               <Sidebar
                 navList={adminRoutes}
                 component={UpdateFood}
+                isAuthenticated={isAuthenticated}
+                user={user}
+                adminRoute={true}
+                isAdmin={isAuthenticated && user.role === "admin"}
+                adminRedirect={"/profile"}
+              />
+            </ProtectedRoute>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/events"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              redirect={"/login"}
+            >
+              <Sidebar
+                navList={adminRoutes}
+                component={AdminEvents}
+                isAuthenticated={isAuthenticated}
+                user={user}
+                adminRoute={true}
+                isAdmin={isAuthenticated && user.role === "admin"}
+                adminRedirect={"/profile"}
+              />
+            </ProtectedRoute>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/events/create"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              redirect={"/login"}
+            >
+              <Sidebar
+                navList={adminRoutes}
+                component={CreateEvent}
+                isAuthenticated={isAuthenticated}
+                user={user}
+                adminRoute={true}
+                isAdmin={isAuthenticated && user.role === "admin"}
+                adminRedirect={"/profile"}
+              />
+            </ProtectedRoute>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/events/update/:id"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              redirect={"/login"}
+            >
+              <Sidebar
+                navList={adminRoutes}
+                component={UpdatEvent}
                 isAuthenticated={isAuthenticated}
                 user={user}
                 adminRoute={true}

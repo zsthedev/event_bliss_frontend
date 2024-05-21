@@ -2,6 +2,7 @@ import React from "react";
 import PrimaryBtn from "../components/primaryBtn";
 import video from "../assets/video.mp4";
 import video1 from "../assets/video_2.mp4";
+import Events from "./Events";
 const Home = () => {
   return (
     <>
@@ -46,6 +47,8 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      <Events/>
     </>
   );
 };
