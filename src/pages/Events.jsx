@@ -18,7 +18,7 @@ const Events = () => {
   ) : (
     <section className="w-full flex justify-center">
       <div className="content my-[50px] flex flex-col items-center">
-        <div className="heading text-center">
+        <div className="heading text-center mb-[40px]">
           <h2>Featured Events</h2>
           <p>Discover the latest and most exciting events</p>
         </div>

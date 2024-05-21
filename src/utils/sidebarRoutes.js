@@ -22,4 +22,9 @@ export const adminRoutes = [
     label: "Events",
     value: "/admin/events",
   },
+
+  {
+    label: "Decors",
+    value: "/admin/decors",
+  },
 ];

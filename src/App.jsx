@@ -21,6 +21,10 @@ import AdminEvents from "./pages/admin/Events/AdminEvents";
 import CreateEvent from "./pages/admin/Events/CreateEvent";
 import { updateEvent } from "./redux/actions/events";
 import UpdatEvent from "./pages/admin/Events/UpdateEvent";
+import AdminDecors from "./pages/admin/Decors/AdminDecor";
+import CreateDecor from "./pages/admin/Decors/CreateDecor";
+import { updateDecor } from "./redux/actions/decor";
+import UpdatDecor from "./pages/admin/Decors/UpdateDecor";
 const App = () => {
   const locomotiveScroll = new LocomotiveScroll();
   const { loading, isAuthenticated, error, message, user } = useSelector(
@@ -205,6 +209,66 @@ const App = () => {
               <Sidebar
                 navList={adminRoutes}
                 component={UpdatEvent}
+                isAuthenticated={isAuthenticated}
+                user={user}
+                adminRoute={true}
+                isAdmin={isAuthenticated && user.role === "admin"}
+                adminRedirect={"/profile"}
+              />
+            </ProtectedRoute>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/decors"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              redirect={"/login"}
+            >
+              <Sidebar
+                navList={adminRoutes}
+                component={AdminDecors}
+                isAuthenticated={isAuthenticated}
+                user={user}
+                adminRoute={true}
+                isAdmin={isAuthenticated && user.role === "admin"}
+                adminRedirect={"/profile"}
+              />
+            </ProtectedRoute>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/decors/create"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              redirect={"/login"}
+            >
+              <Sidebar
+                navList={adminRoutes}
+                component={CreateDecor}
+                isAuthenticated={isAuthenticated}
+                user={user}
+                adminRoute={true}
+                isAdmin={isAuthenticated && user.role === "admin"}
+                adminRedirect={"/profile"}
+              />
+            </ProtectedRoute>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/decors/update/:id"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              redirect={"/login"}
+            >
+              <Sidebar
+                navList={adminRoutes}
+                component={UpdatDecor}
                 isAuthenticated={isAuthenticated}
                 user={user}
                 adminRoute={true}
