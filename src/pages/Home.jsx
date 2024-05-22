@@ -1,11 +1,53 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PrimaryBtn from "../components/primaryBtn";
 import video from "../assets/video.mp4";
 import video1 from "../assets/video_2.mp4";
 import Events from "./Events";
 import Decors from "./Decors";
+import { useDispatch, useSelector } from "react-redux";
+import toast from "react-hot-toast";
+import { updateReqStatus } from "../redux/actions/request";
+import Loader from "./Loader";
 const Home = () => {
-  return (
+  const { loading, error, message } = useSelector((state) => state.payment);
+  const {
+    loading: rLoading,
+    error: rError,
+    message: rMessage,
+  } = useSelector((state) => state.payment);
+  const id = useSelector((state) => state.payment?.requestId);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const query = new URLSearchParams(window.location.search);
+    let reqId = window.location.search.split("=")[2];
+    if (query.get("success")) {
+      toast.success("Order placed! You will receive an email confirmation.");
+      dispatch(updateReqStatus(reqId));
+    }
+
+    if (query.get("canceled")) {
+      toast.error(
+        "Order canceled -- continue to shop around and checkout when you're ready."
+      );
+    }
+  }, [id]);
+
+  useEffect(() => {
+    if (message) {
+      toast.success(message);
+      dispatch({ type: "clearMessage" });
+    }
+
+    if (error) {
+      toast.error(error);
+      dispatch({ type: "clearError" });
+    }
+  }, [error, message]);
+
+  return loading || rLoading ? (
+    <Loader />
+  ) : (
     <>
       <section className="w-full min-h-screen flex justify-center items-center">
         <div className="content flex justify-center items-center mt-[150px] mb-[80px]">
@@ -49,8 +91,8 @@ const Home = () => {
         </div>
       </section>
 
-      <Events/>
-      <Decors/>
+      <Events />
+      <Decors />
     </>
   );
 };

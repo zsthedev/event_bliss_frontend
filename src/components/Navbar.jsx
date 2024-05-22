@@ -4,9 +4,7 @@ import PrimaryBtn from "./primaryBtn";
 
 const Navbar = ({ isAuthenticated }) => {
   const isActive = (path) => {
-    if (
-      path === location.pathname 
-    ) {
+    if (path === location.pathname) {
       return true;
     }
     return false;
@@ -16,7 +14,7 @@ const Navbar = ({ isAuthenticated }) => {
   return (
     <nav
       className={`w-full flex justify-center items-center fixed top-0 left-0 bg-white ${
-        isAuthenticated ? "hidden" : "visible"
+        isAuthenticated && location.pathname !== "/" ? "hidden" : "visible"
       }`}
     >
       <div className="content flex  m-auto py-4 items-center justify-between border-b-2 border-light_bg">

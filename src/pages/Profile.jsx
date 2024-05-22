@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PrimaryBtn from "../components/primaryBtn";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { updateReqStatus } from "../redux/actions/request";
 
 const Profile = ({ user, isAuthenticated }) => {
   const [name, setName] = useState(isAuthenticated && user.name);
   const [email, setEmail] = useState(isAuthenticated && user.email);
   const [role, setRole] = useState(isAuthenticated && user.role);
+  const dispatch = useDispatch();
+  
 
   return (
     <section className="w-full flex justify-center items-center">
@@ -37,7 +42,7 @@ const Profile = ({ user, isAuthenticated }) => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <input type="text" placeholder="Role" readOnly value={role}/>
+              <input type="text" placeholder="Role" readOnly value={role} />
               <PrimaryBtn
                 customStyling={"bg-crimson text-white"}
                 title={"Update Profile"}

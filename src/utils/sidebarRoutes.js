@@ -32,4 +32,9 @@ export const adminRoutes = [
     label: "Decors",
     value: "/admin/decors",
   },
+
+  {
+    label: "Clients",
+    value: "/admin/clients",
+  },
 ];

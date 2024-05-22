@@ -18,7 +18,7 @@ const Sidebar = ({ navList, component: Component, user, isAuthenticated }) => {
     dispatch(logout());
   };
   return (
-    <div className="sidebar flex justify-between items-center">
+    <div className="w-full box-border sidebar flex justify-between items-center">
       <div className="w-[15%] h-screen p-[30px] sticky top-0 left-0">
         <p className="logo text-3xl font-flv text-black font-[500] pt-[30px] mb-8">
           Event<span className="font-flv text-crimson">Bliss</span>
@@ -49,7 +49,8 @@ const Sidebar = ({ navList, component: Component, user, isAuthenticated }) => {
             <span className="text-crimson">{isAuthenticated && user.name}</span>
           </p>
 
-          <div className="actions relative">
+          <div className="actions relative flex items-center gap-4">
+            <Link className="text-lg text-dark font-[500]" to={"/cart"}>Cart</Link>
             <img
               onClick={() => {
                 setVisible(!visible);

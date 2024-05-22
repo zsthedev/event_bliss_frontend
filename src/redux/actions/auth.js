@@ -88,12 +88,12 @@ export const logout = () => async (dispatch) => {
   }
 };
 
-export const buySubscription = () => async (dispatch) => {
+export const createCheckout = (id) => async (dispatch) => {
   try {
-    dispatch({ type: "buySubscriptionRequest" });
+    dispatch({ type: "eventPaymentRequest" });
 
     const { data } = await axios.post(
-      `${server}/create-subscription`,
+      `${server}/create_checkout/${id}`,
       {},
 
       {
@@ -105,10 +105,10 @@ export const buySubscription = () => async (dispatch) => {
       }
     );
 
-    dispatch({ type: "buySubscriptionSuccess", payload: data });
+    dispatch({ type: "eventPaymentSuccess", payload: data });
   } catch (error) {
     dispatch({
-      type: "buySubscriptionFail",
+      type: "eventPaymentFail",
       payload: error.response.data.message,
     });
   }

@@ -157,14 +157,15 @@ export const profileReducer = createReducer(
 export const subscriptionReducer = createReducer(
   {},
   {
-    buySubscriptionRequest: (state) => {
+    eventPaymentRequest: (state) => {
       state.loading = true;
     },
-    buySubscriptionSuccess: (state, action) => {
+    eventPaymentSuccess: (state, action) => {
       state.loading = false;
       state.sessionId = action.payload.sessionId;
+      state.requestId = action.payload.requestId;
     },
-    buySubscriptionFail: (state, action) => {
+    eventPaymentFail: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },

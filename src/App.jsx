@@ -1,5 +1,10 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import Login from "./pages/auth/Login";
@@ -27,6 +32,9 @@ import { updateDecor } from "./redux/actions/decor";
 import UpdatDecor from "./pages/admin/Decors/UpdateDecor";
 import BookEvent from "./pages/BookEvent";
 import ClientEvents from "./pages/ClientEvents";
+import AdminClients from "./pages/admin/AdminClients";
+import RequestDetail from "./pages/RequestDetail";
+import Cart from "./pages/Cart";
 const App = () => {
   const locomotiveScroll = new LocomotiveScroll();
   const { loading, isAuthenticated, error, message, user } = useSelector(
@@ -46,9 +54,11 @@ const App = () => {
       dispatch({ type: "clearError" });
     }
   }, [error, message]);
+
   useEffect(() => {
     dispatch(loadUser());
   }, []);
+
   return loading ? (
     <Loader />
   ) : (
@@ -136,6 +146,48 @@ const App = () => {
                     : adminRoutes
                 }
                 component={ClientEvents}
+                isAuthenticated={isAuthenticated}
+                user={user}
+              />
+            </ProtectedRoute>
+          }
+        ></Route>
+
+        <Route
+          path="/request/:id"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              redirect={"/login"}
+            >
+              <Sidebar
+                navList={
+                  isAuthenticated && user.role === "user"
+                    ? userRoutes
+                    : adminRoutes
+                }
+                component={RequestDetail}
+                isAuthenticated={isAuthenticated}
+                user={user}
+              />
+            </ProtectedRoute>
+          }
+        ></Route>
+
+        <Route
+          path="/cart"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              redirect={"/login"}
+            >
+              <Sidebar
+                navList={
+                  isAuthenticated && user.role === "user"
+                    ? userRoutes
+                    : adminRoutes
+                }
+                component={Cart}
                 isAuthenticated={isAuthenticated}
                 user={user}
               />
@@ -312,6 +364,26 @@ const App = () => {
               <Sidebar
                 navList={adminRoutes}
                 component={UpdatDecor}
+                isAuthenticated={isAuthenticated}
+                user={user}
+                adminRoute={true}
+                isAdmin={isAuthenticated && user.role === "admin"}
+                adminRedirect={"/profile"}
+              />
+            </ProtectedRoute>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/clients"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              redirect={"/login"}
+            >
+              <Sidebar
+                navList={adminRoutes}
+                component={AdminClients}
                 isAuthenticated={isAuthenticated}
                 user={user}
                 adminRoute={true}

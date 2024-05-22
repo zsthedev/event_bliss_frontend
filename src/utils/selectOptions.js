@@ -49,3 +49,11 @@ export const eventOptions = (foods) => {
   }));
 };
 
+export const vendorOptions = (users) => {
+  return users
+    .filter((u) => u.role === "vendor")
+    .map((f) => ({
+      value: f._id,
+      label: f.name,
+    }));
+};
