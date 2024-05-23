@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: poppins;
+  src: url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+}
+
+@font-face {
+  font-family: flv;
+  src: url("./assets/fonts/flaviotte.ttf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins";
+}
+
+.content {
+  @apply w-[95%] h-full max-w-[1920px];
+}
+
+h2 {
+  @apply text-4xl font-flv text-black font-[500];
+}
+
+input {
+  @apply p-3 w-full bg-light_bg rounded-md outline-none;
+}
+
+.flex_section {
+  @apply w-full min-h-screen flex justify-center;
+}
+
+table {
+  width: 100%;
+
+  padding: 20px;
+  border-radius: 5px;
+  overflow: hidden;
+
+  thead {
+  }
+
+  th {
+    @apply font-[400] text-white bg-crimson text-left px-5 py-2;
+  }
+
+  tr {
+    width: 100%;
+    background-color: white;
+    position: relative;
+  }
+  td {
+    @apply bg-white px-5 py-2 mb-2 border-b border-r border-b-light_bg border-r-light_bg min-h-full;
+  }
+
+  .actions {
+    a,
+    button {
+      @apply bg-black w-[100px] px-2 py-1 inline-block text-center text-sm text-white rounded-md;
+    }
+
+    .del {
+      @apply bg-crimson;
+    }
+  }
+}
