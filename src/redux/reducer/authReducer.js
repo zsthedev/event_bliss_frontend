@@ -85,8 +85,6 @@ export const authReducer = createReducer(
       state.error = action.payload;
     },
 
-   
-
     makeCartEmptyRequest: (state) => {
       state.loading = true;
     },
@@ -94,6 +92,30 @@ export const authReducer = createReducer(
       state.loading = false;
     },
     makeCartEmptyFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+    approveVendorRequest: (state) => {
+      state.loading = true;
+    },
+    approveVendorSuccess: (state, action) => {
+      state.loading = false;
+      state.message = action.payload.message;
+    },
+    approveVendorFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+    createReviewRequest: (state) => {
+      state.loading = true;
+    },
+    createReviewSuccess: (state, action) => {
+      state.loading = false;
+      state.message = action.payload.message;
+    },
+    createReviewFail: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },

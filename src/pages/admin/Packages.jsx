@@ -51,9 +51,9 @@ const Packages = () => {
                     <td>{d.title}</td>
                     <td>{d.numberOfPeople}</td>
                     <td>PKR {d.price}</td>
-                    <td className="actions">
+                    <td className="actions flex gap-3">
                       <Link>Update</Link>
-                      <button className="del ml-3">Delete</button>
+                      <button className="del">Delete</button>
                     </td>
                   </tr>
                 ))

@@ -237,3 +237,54 @@ export const getCartItems = () => async (dispatch) => {
     });
   }
 };
+
+export const approveVendor = (reqId) => async (dispatch) => {
+  try {
+    dispatch({ type: "approveVendorRequest" });
+
+    const { data } = await axios.put(
+      `${server}/approve_vendor/${reqId}`,
+      {},
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        withCredentials: true,
+      }
+    );
+
+    dispatch({ type: "approveVendorSuccess", payload: data.cart });
+  } catch (error) {
+    dispatch({
+      type: "approveVendorFail",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+
+export const createReview = (author, ratings, message) => async (dispatch) => {
+  try {
+    dispatch({ type: "createReviewRequest" });
+
+    const { data } = await axios.post(
+      `${server}/create_review`,
+      {author, ratings, message},
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        withCredentials: true,
+      }
+    );
+
+    dispatch({ type: "createReviewSuccess", payload: data.cart });
+  } catch (error) {
+    dispatch({
+      type: "createReviewFail",
+      payload: error.response.data.message,
+    });
+  }
+};

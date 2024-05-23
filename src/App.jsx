@@ -37,6 +37,7 @@ import RequestDetail from "./pages/RequestDetail";
 import Cart from "./pages/Cart";
 import Packages from "./pages/admin/Packages";
 import CreatePackage from "./pages/admin/CreatePackage";
+import CreateReview from "./pages/CreateReview";
 const App = () => {
   const locomotiveScroll = new LocomotiveScroll();
   const { loading, isAuthenticated, error, message, user } = useSelector(
@@ -101,7 +102,8 @@ const App = () => {
             >
               <Sidebar
                 navList={
-                  isAuthenticated && user.role === "user"
+                  (isAuthenticated && user.role === "user") ||
+                  (isAuthenticated && user.role === "vendor")
                     ? userRoutes
                     : adminRoutes
                 }
@@ -122,7 +124,8 @@ const App = () => {
             >
               <Sidebar
                 navList={
-                  isAuthenticated && user.role === "user"
+                  (isAuthenticated && user.role === "user") ||
+                  (isAuthenticated && user.role === "vendor")
                     ? userRoutes
                     : adminRoutes
                 }
@@ -143,11 +146,34 @@ const App = () => {
             >
               <Sidebar
                 navList={
-                  isAuthenticated && user.role === "user"
+                  (isAuthenticated && user.role === "user") ||
+                  (isAuthenticated && user.role === "vendor")
                     ? userRoutes
                     : adminRoutes
                 }
                 component={ClientEvents}
+                isAuthenticated={isAuthenticated}
+                user={user}
+              />
+            </ProtectedRoute>
+          }
+        ></Route>
+
+        <Route
+          path="/create_review/:id"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              redirect={"/login"}
+            >
+              <Sidebar
+                navList={
+                  (isAuthenticated && user.role === "user") ||
+                  (isAuthenticated && user.role === "vendor")
+                    ? userRoutes
+                    : adminRoutes
+                }
+                component={CreateReview}
                 isAuthenticated={isAuthenticated}
                 user={user}
               />
@@ -164,7 +190,8 @@ const App = () => {
             >
               <Sidebar
                 navList={
-                  isAuthenticated && user.role === "user"
+                  (isAuthenticated && user.role === "user") ||
+                  (isAuthenticated && user.role === "vendor")
                     ? userRoutes
                     : adminRoutes
                 }
@@ -185,7 +212,8 @@ const App = () => {
             >
               <Sidebar
                 navList={
-                  isAuthenticated && user.role === "user"
+                  (isAuthenticated && user.role === "user") ||
+                  (isAuthenticated && user.role === "vendor")
                     ? userRoutes
                     : adminRoutes
                 }
@@ -206,7 +234,8 @@ const App = () => {
             >
               <Sidebar
                 navList={
-                  isAuthenticated && user.role === "user"
+                  (isAuthenticated && user.role === "user") ||
+                  (isAuthenticated && user.role === "vendor")
                     ? userRoutes
                     : adminRoutes
                 }

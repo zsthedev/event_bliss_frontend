@@ -8,6 +8,8 @@ const AllPackages = () => {
   const { deals, loading, error, message } = useSelector(
     (state) => state.package
   );
+
+  console.log(deals);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllPackages());
@@ -23,11 +25,16 @@ const AllPackages = () => {
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Et, sequi.
           </p>
         </div>
-        <div className="packages-row">
+        <div className="packages-row mt-[50px]">
           {deals && deals.length > 0
-            ? deals.map((d) => {
-                <Deal title={"Basic"} />;
-              })
+            ? deals.map((d) => (
+                <Deal
+                  title={d.title}
+                  price={d.price}
+                  items={d.items}
+                  numberOfPeople={d.numberOfPeople}
+                />
+              ))
             : ""}
         </div>
       </div>

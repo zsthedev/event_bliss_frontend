@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getMyRequests } from "../redux/actions/request";
 import toast from "react-hot-toast";
 import Loader from "./Loader";
 import axios from "axios";
 import { server } from "../redux/store";
 import { loadStripe } from "@stripe/stripe-js";
-import { createCheckout } from "../redux/actions/auth";
+import { approveVendor, createCheckout } from "../redux/actions/auth";
 
 const ClientEvents = ({ user }) => {
   const dispatch = useDispatch();
@@ -69,6 +69,8 @@ const ClientEvents = ({ user }) => {
   const clickHandler = (e) => {
     dispatch(createCheckout(e.target.id));
   };
+
+  const navigate = useNavigate()
   return loading || pLoading ? (
     <Loader />
   ) : (
@@ -116,8 +118,7 @@ const ClientEvents = ({ user }) => {
                     <td>{r.status}</td>
 
                     <td className="actions flex items-center gap-2">
-                      {(r.status === "fee_pending" && user.role !== "admin") ||
-                      user.role === "vendor" ? (
+                      {r.status === "fee_pending" && user.role === "user" ? (
                         <button id={r._id} onClick={clickHandler}>
                           Pay Fees
                         </button>
@@ -127,16 +128,15 @@ const ClientEvents = ({ user }) => {
 
                       {r.status === "under review by Vendor" &&
                       user.role === "vendor" ? (
-                        <button id={r._id} onClick={"approveHandler"}>
+                        <button id={r._id} onClick={() => {dispatch(approveVendor(r._id))}}>
                           Approve
                         </button>
                       ) : (
                         ""
                       )}
 
-                      {(r.status === "fee_paid" && user.role !== "admin") ||
-                      user.role === "vendor" ? (
-                        <button id={r._id} onClick={"createReviewHandler"}>
+                      {r.status === "fee_paid" && user.role === "user" ? (
+                        <button id={r._id} onClick={() => {navigate(`/create_review/${r._id}`)}}>
                           Review
                         </button>
                       ) : (
