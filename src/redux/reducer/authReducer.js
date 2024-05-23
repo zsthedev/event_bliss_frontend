@@ -73,6 +73,7 @@ export const authReducer = createReducer(
       state.error = action.payload;
     },
 
+<<<<<<< HEAD
     chatAIRequest: (state) => {
       state.loading = true;
     },
@@ -85,6 +86,8 @@ export const authReducer = createReducer(
       // state.error = action.payload;
     },
 
+=======
+>>>>>>> 5da88815be93b2c904609f744b075dbcf9c2fb55
     removeFromCartRequest: (state) => {
       state.loading = true;
     },

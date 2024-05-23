@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import PrimaryBtn from "./primaryBtn";
 
 const Navbar = ({ isAuthenticated }) => {
+<<<<<<< HEAD
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const isActive = (path) => {
@@ -22,11 +23,32 @@ const Navbar = ({ isAuthenticated }) => {
       }`}
     >
       <div className="content flex w-full max-w-6xl m-auto py-4 px-4 lg:px-0 items-center justify-between border-b-2 border-light_bg">
+=======
+  const isActive = (path) => {
+    if (path === location.pathname) {
+      return true;
+    }
+    return false;
+  };
+
+  const navigate = useNavigate();
+  return (
+    <nav
+      className={`w-full flex justify-center items-center fixed top-0 left-0 bg-white ${
+        isAuthenticated && location.pathname !== "/" && location.pathname !== "/menu" ? "hidden" : "visible"
+      }`}
+    >
+      <div className="content flex  m-auto py-4 items-center justify-between border-b-2 border-light_bg">
+>>>>>>> 5da88815be93b2c904609f744b075dbcf9c2fb55
         <Link to={"/"} className="logo text-3xl font-flv text-black font-[500]">
           Event<span className="font-flv text-crimson">Bliss</span>
         </Link>
 
+<<<<<<< HEAD
         <div className="hidden lg:flex nav-items gap-5">
+=======
+        <div className="nav-items flex gap-5">
+>>>>>>> 5da88815be93b2c904609f744b075dbcf9c2fb55
           {[
             { label: "Home", value: "/" },
             { label: "About", value: "/about" },
@@ -45,7 +67,11 @@ const Navbar = ({ isAuthenticated }) => {
           ))}
         </div>
 
+<<<<<<< HEAD
         <div className="hidden lg:flex nav-part-3 gap-2 items-center">
+=======
+        <div className="nav-part-3 flex gap-2 items-center">
+>>>>>>> 5da88815be93b2c904609f744b075dbcf9c2fb55
           <PrimaryBtn
             handleClick={() => {
               navigate("/register");
@@ -65,6 +91,7 @@ const Navbar = ({ isAuthenticated }) => {
             }
           />
         </div>
+<<<<<<< HEAD
 
         <div className="lg:hidden flex items-center">
           <button
@@ -130,6 +157,9 @@ const Navbar = ({ isAuthenticated }) => {
           </div>
         </div>
       )}
+=======
+      </div>
+>>>>>>> 5da88815be93b2c904609f744b075dbcf9c2fb55
     </nav>
   );
 };

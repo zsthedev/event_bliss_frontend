@@ -8,6 +8,7 @@ const AllPackages = () => {
   const { deals, loading, error, message } = useSelector(
     (state) => state.package
   );
+<<<<<<< HEAD
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,11 +19,26 @@ const AllPackages = () => {
     <section className="w-full flex justify-center items-center">
       <div className="content mt-40 mb-80 flex flex-col">
         <div className="heading mb-8"> {/* Added margin bottom here */}
+=======
+
+  console.log(deals);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllPackages());
+  }, []);
+  return loading ? (
+    <Loader />
+  ) : (
+    <section className="w-full flex justify-center items-center">
+      <div className="content mt-[40px] mb-[80px]">
+        <div className="heading">
+>>>>>>> 5da88815be93b2c904609f744b075dbcf9c2fb55
           <h2>Our Packages</h2>
           <p>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Et, sequi.
           </p>
         </div>
+<<<<<<< HEAD
         {loading ? (
           <Loader />
         ) : error ? (
@@ -42,6 +58,20 @@ const AllPackages = () => {
         ) : (
           <p>No packages available</p>
         )}
+=======
+        <div className="packages-row mt-[50px]">
+          {deals && deals.length > 0
+            ? deals.map((d) => (
+                <Deal
+                  title={d.title}
+                  price={d.price}
+                  items={d.items}
+                  numberOfPeople={d.numberOfPeople}
+                />
+              ))
+            : ""}
+        </div>
+>>>>>>> 5da88815be93b2c904609f744b075dbcf9c2fb55
       </div>
     </section>
   );
