@@ -38,10 +38,7 @@ import Cart from "./pages/Cart";
 import Packages from "./pages/admin/Packages";
 import CreatePackage from "./pages/admin/CreatePackage";
 import CreateReview from "./pages/CreateReview";
-<<<<<<< HEAD
 import AIChat from "./pages/AIChat";
-=======
->>>>>>> 5da88815be93b2c904609f744b075dbcf9c2fb55
 const App = () => {
   const locomotiveScroll = new LocomotiveScroll();
   const { loading, isAuthenticated, error, message, user } = useSelector(
@@ -120,7 +117,6 @@ const App = () => {
         ></Route>
 
         <Route
-<<<<<<< HEAD
           path="/chat"
           element={
             <ProtectedRoute
@@ -143,8 +139,6 @@ const App = () => {
         ></Route>
 
         <Route
-=======
->>>>>>> 5da88815be93b2c904609f744b075dbcf9c2fb55
           path="/book_event"
           element={
             <ProtectedRoute

@@ -5,16 +5,9 @@ import Loader from "./Loader";
 import Event from "../components/Event";
 
 const Events = () => {
-<<<<<<< HEAD
   const { loading, error, message, events } = useSelector((state) => state.event);
   const dispatch = useDispatch();
   
-=======
-  const { loading, error, message, events } = useSelector(
-    (state) => state.event
-  );
-  const dispatch = useDispatch();
->>>>>>> 5da88815be93b2c904609f744b075dbcf9c2fb55
   useEffect(() => {
     dispatch(getAllEvents());
   }, [dispatch, error, message]);
@@ -22,7 +15,6 @@ const Events = () => {
   return loading ? (
     <Loader />
   ) : (
-<<<<<<< HEAD
     <section className="w-full flex justify-center px-4 lg:px-0">
       <div className="content my-[50px] flex flex-col items-center w-full max-w-6xl">
         <div className="heading text-center mb-[40px]">
@@ -38,17 +30,6 @@ const Events = () => {
           ) : (
             <p className="text-center text-gray-500">No events available</p>
           )}
-=======
-    <section className="w-full flex justify-center">
-      <div className="content my-[50px] flex flex-col items-center">
-        <div className="heading text-center mb-[40px]">
-          <h2>Featured Events</h2>
-          <p>Discover the latest and most exciting events</p>
-        </div>
-
-        <div className="events-row w-full flex gap-2 items-center flex-wrap">
-          {events && events.length > 0 ? events.map((e) => <Event title={e.title} description={e.description} link={""}/>) : ""}
->>>>>>> 5da88815be93b2c904609f744b075dbcf9c2fb55
         </div>
       </div>
     </section>

@@ -15,14 +15,11 @@ export const userRoutes = [
     label: "Menu",
     value: "/cmenu",
   },
-<<<<<<< HEAD
 
   {
     label: "Chat",
     value: "/chat",
   },
-=======
->>>>>>> 5da88815be93b2c904609f744b075dbcf9c2fb55
 ];
 
 export const adminRoutes = [

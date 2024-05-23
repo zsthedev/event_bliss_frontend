@@ -10,10 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
     "@google/generative-ai": "^0.11.4",
-=======
->>>>>>> 5da88815be93b2c904609f744b075dbcf9c2fb55
     "@reduxjs/toolkit": "^1.9.7",
     "@stripe/react-stripe-js": "^2.7.1",
     "@stripe/stripe-js": "^3.1.0",
