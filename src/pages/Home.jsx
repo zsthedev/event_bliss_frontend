@@ -8,6 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { updateReqStatus } from "../redux/actions/request";
 import Loader from "./Loader";
+import { makeCartEmpty } from "../redux/actions/auth";
+import Packages from "./admin/Packages";
+import AllPackages from "./AllPackages";
 const Home = () => {
   const { loading, error, message } = useSelector((state) => state.payment);
   const {
@@ -32,6 +35,20 @@ const Home = () => {
       );
     }
   }, [id]);
+
+  useEffect(() => {
+    const query = new URLSearchParams(window.location.search);
+    if (query.get("csuccess")) {
+      toast.success("Order placed!");
+      // dispatch(makeCartEmpty());
+    }
+
+    if (query.get("ccanceled")) {
+      toast.error(
+        "Order canceled -- continue to shop around and checkout when you're ready."
+      );
+    }
+  }, []);
 
   useEffect(() => {
     if (message) {
@@ -93,6 +110,7 @@ const Home = () => {
 
       <Events />
       <Decors />
+      <AllPackages />
     </>
   );
 };

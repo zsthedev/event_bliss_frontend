@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PrimaryBtn from "./primaryBtn";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/actions/auth";
 
-const Food = ({ name, category, price, image, desc, ratings }) => {
+const Food = ({ name, category, price, image, desc, ratings, id }) => {
+  const dispatch = useDispatch();
+  
+  const clickHandler = (e) => {
+    e.preventDefault();
+    dispatch(addToCart(e.target.id))
+  };
+
   return (
-    <div className="w-[400px] h-[500px] p-[20px] bg-light_bg flex flex-col gap-3 rounded-lg">
+    <div className={`w-[31%] h-[500px] p-[20px]  flex flex-col gap-3 rounded-lg  ${location.pathname === "/menu" ? "bg-light_bg" : "bg-white"}`}>
       <img
         src={image}
         alt=""
@@ -18,6 +27,8 @@ const Food = ({ name, category, price, image, desc, ratings }) => {
       <PrimaryBtn
         title={"Add To Cart"}
         customStyling={"w-full bg-crimson text-white"}
+        id={id}
+        handleClick={clickHandler}
       />
     </div>
   );

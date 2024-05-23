@@ -10,6 +10,11 @@ export const userRoutes = [
     label: "Events",
     value: "/client_events",
   },
+
+  {
+    label: "Menu",
+    value: "/cmenu",
+  },
 ];
 
 export const adminRoutes = [
@@ -36,5 +41,10 @@ export const adminRoutes = [
   {
     label: "Clients",
     value: "/admin/clients",
+  },
+
+  {
+    label: "Packages",
+    value: "/admin/packages",
   },
 ];

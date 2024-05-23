@@ -13,7 +13,7 @@ const RequestDetail = ({ user }) => {
   useEffect(() => {
     dispatch(getReqDetails(params.id));
   }, []);
-  return loading ? (
+  return loading || !details ? (
     <Loader />
   ) : (
     <section className="w-full flex justify-center items-center">

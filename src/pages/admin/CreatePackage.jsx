@@ -1,33 +1,35 @@
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
+import { useDispatch, useSelector } from "react-redux";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import Loader from "../Loader";
 import {
   eventOptions,
   foodOptions,
   selectStyles,
-} from "../utils/selectOptions";
-import PrimaryBtn from "../components/primaryBtn";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllMenu } from "../redux/actions/menu";
-import { getAllDecors } from "../redux/actions/decor";
-import { getAllEvents } from "../redux/actions/events";
-import Loader from "./Loader";
-import toast from "react-hot-toast";
-import { createRequest } from "../redux/actions/request";
-import { useNavigate } from "react-router-dom";
+} from "../../utils/selectOptions";
+import { getAllMenu } from "../../redux/actions/menu";
+import { getAllDecors } from "../../redux/actions/decor";
+import { getAllEvents } from "../../redux/actions/events";
+import PrimaryBtn from "../../components/primaryBtn";
+import { createPackage } from "../../redux/actions/package";
 
-const BookEvent = () => {
+const CreatePackage = () => {
   const [foodSelections, setFoodSelections] = useState([
     { id: 1, value: null },
   ]);
-  const [date, setDate] = useState("");
+  const [title, setTitle] = useState("");
   const [event, setEvent] = useState("");
   const [deecor, setDeecor] = useState("");
   const [numOfPeople, setNumOfPeople] = useState("");
+  const [price, setPrice] = useState("");
+  
   const {
     loading: rloading,
     error,
     message,
-  } = useSelector((state) => state.requests);
+  } = useSelector((state) => state.package);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -45,6 +47,7 @@ const BookEvent = () => {
     if (message) {
       toast.success(message);
       dispatch({ type: "clearMessage" });
+      navigate("/admin/packages")
     }
   }, [error, message]);
 
@@ -69,15 +72,15 @@ const BookEvent = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(
-      createRequest(
-        date,
+      createPackage(
+        title,
         event.value,
         deecor.value,
         numOfPeople,
+        price,
         foodSelections
       )
     );
-
   };
 
   return loading ||
@@ -96,18 +99,24 @@ const BookEvent = () => {
           className="w-full bg-white p-[20px] rounded-lg flex flex-col gap-3"
           onSubmit={submitHandler}
         >
-          <h3 className="text-xl font-[500] text-black">General Information</h3>
+          <h3 className="text-xl font-[500] text-black">Create New Package</h3>
           <input
-            type="date"
-            placeholder="Enter Date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
+            type="text"
+            placeholder="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
           />
           <input
             type="number"
             placeholder="Number of People"
             value={numOfPeople}
             onChange={(e) => setNumOfPeople(e.target.value)}
+          />
+          <input
+            type="number"
+            placeholder="Price"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
           />
 
           <Select
@@ -159,7 +168,7 @@ const BookEvent = () => {
           ))}
 
           <PrimaryBtn
-            title={"Request"}
+            title={"Create Package"}
             customStyling={"bg-crimson my-5 text-white"}
           />
         </form>
@@ -168,4 +177,4 @@ const BookEvent = () => {
   );
 };
 
-export default BookEvent;
+export default CreatePackage;

@@ -9,7 +9,7 @@ import { server } from "../redux/store";
 import { loadStripe } from "@stripe/stripe-js";
 import { createCheckout } from "../redux/actions/auth";
 
-const ClientEvents = ({user}) => {
+const ClientEvents = ({ user }) => {
   const dispatch = useDispatch();
   const { loading, error, message, requests } = useSelector(
     (state) => state.requests
@@ -20,7 +20,7 @@ const ClientEvents = ({user}) => {
 
   const sessionId = useSelector((state) => state.payment?.sessionId);
 
-  const {loading : pLoading} = useSelector(state => state.payment)
+  const { loading: pLoading } = useSelector((state) => state.payment);
 
   useEffect(() => {
     if (error) {
@@ -95,8 +95,8 @@ const ClientEvents = ({user}) => {
               <th>Sr</th>
               <th>Date</th>
               <th>No Of Peoples</th>
-              <th>Event</th>
-              <th>Decor</th>
+              {/* <th>Event</th> */}
+              {/* <th>Decor</th> */}
               <th>Cost</th>
               <th>Status</th>
               <th>Actions</th>
@@ -110,12 +110,14 @@ const ClientEvents = ({user}) => {
                     <td>{index + 1}</td>
                     <td>{r.date.split("T")[0]}</td>
                     <td>{r.numberOfPeople}</td>
-                    <td>{r.event}</td>
-                    <td>{r.decor}</td>
+                    {/* <td>{r.event}</td> */}
+                    {/* <td>{r.decor}</td> */}
                     <td>{r.cost}</td>
                     <td>{r.status}</td>
-                    <td className="actions">
-                      {r.status === "fee_pending" && user.role !== "admin" ? (
+
+                    <td className="actions flex items-center gap-2">
+                      {(r.status === "fee_pending" && user.role !== "admin") ||
+                      user.role === "vendor" ? (
                         <button id={r._id} onClick={clickHandler}>
                           Pay Fees
                         </button>
@@ -123,6 +125,23 @@ const ClientEvents = ({user}) => {
                         ""
                       )}
 
+                      {r.status === "under review by Vendor" &&
+                      user.role === "vendor" ? (
+                        <button id={r._id} onClick={"approveHandler"}>
+                          Approve
+                        </button>
+                      ) : (
+                        ""
+                      )}
+
+                      {(r.status === "fee_paid" && user.role !== "admin") ||
+                      user.role === "vendor" ? (
+                        <button id={r._id} onClick={"createReviewHandler"}>
+                          Review
+                        </button>
+                      ) : (
+                        ""
+                      )}
                       <Link to={`/request/${r._id}`}>View</Link>
                     </td>
                   </tr>

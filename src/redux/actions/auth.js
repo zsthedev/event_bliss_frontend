@@ -113,3 +113,127 @@ export const createCheckout = (id) => async (dispatch) => {
     });
   }
 };
+
+export const addToCart = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: "addToCartRequest" });
+
+    const { data } = await axios.put(
+      `${server}/addtocart/${id}`,
+      {},
+
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        withCredentials: true,
+      }
+    );
+
+    dispatch({ type: "addToCartSuccess", payload: data });
+  } catch (error) {
+    dispatch({
+      type: "addToCartFail",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const removeFromCart = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: "removeFromCartRequest" });
+
+    const { data } = await axios.delete(
+      `${server}/removefromcart/${id}`,
+
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        withCredentials: true,
+      }
+    );
+
+    dispatch({ type: "removeFromCartSuccess", payload: data });
+  } catch (error) {
+    dispatch({
+      type: "removeFromCartFail",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const createCartCheckout = () => async (dispatch) => {
+  try {
+    dispatch({ type: "cartCheckoutRequest" });
+
+    const { data } = await axios.post(
+      `${server}/create_cart_checkout`,
+      {},
+
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        withCredentials: true,
+      }
+    );
+
+    dispatch({ type: "cartCheckoutSuccess", payload: data });
+  } catch (error) {
+    dispatch({
+      type: "cartCheckoutFail",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const makeCartEmpty = () => async (dispatch) => {
+  try {
+    dispatch({ type: "makeCartEmptyRequest" });
+
+    const { data } = await axios.put(
+      `${server}/cartempty`,
+      {},
+
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        withCredentials: true,
+      }
+    );
+
+    dispatch({ type: "makeCartEmptySuccess", payload: data });
+  } catch (error) {
+    dispatch({
+      type: "makeCartEmptyFail",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const getCartItems = () => async (dispatch) => {
+  try {
+    dispatch({ type: "getCartRequset" });
+
+    const { data } = await axios.get(`${server}/cart`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      withCredentials: true,
+    });
+
+    dispatch({ type: "getCartSuccess", payload: data.cart });
+  } catch (error) {
+    dispatch({
+      type: "getCartFail",
+      payload: error.response.data.message,
+    });
+  }
+};

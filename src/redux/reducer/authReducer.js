@@ -61,6 +61,43 @@ export const authReducer = createReducer(
       state.error = action.payload;
     },
 
+    addToCartRequest: (state) => {
+      state.loading = true;
+    },
+    addToCartSuccess: (state, action) => {
+      state.loading = false;
+      state.message = action.payload.message;
+    },
+    addToCartFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+    removeFromCartRequest: (state) => {
+      state.loading = true;
+    },
+    removeFromCartSuccess: (state, action) => {
+      state.loading = false;
+      state.message = action.payload.message;
+    },
+    removeFromCartFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+   
+
+    makeCartEmptyRequest: (state) => {
+      state.loading = true;
+    },
+    makeCartEmptySuccess: (state, action) => {
+      state.loading = false;
+    },
+    makeCartEmptyFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
     clearError: (state) => {
       state.error = null;
     },
@@ -166,6 +203,18 @@ export const subscriptionReducer = createReducer(
       state.requestId = action.payload.requestId;
     },
     eventPaymentFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+    cartCheckoutRequest: (state) => {
+      state.loading = true;
+    },
+    cartCheckoutSuccess: (state, action) => {
+      state.loading = false;
+      state.csessionId = action.payload.sessionId;
+    },
+    cartCheckoutFail: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },

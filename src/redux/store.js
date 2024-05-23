@@ -4,6 +4,7 @@ import { menuReducer } from "./reducer/menuReducer";
 import { eventReducer } from "./reducer/eventReducer";
 import { decorReducer } from "./reducer/decorReducer";
 import { requestReducer } from "./reducer/requestReducer";
+import { packageReducer } from "./reducer/packageReducer";
 
 
 export const store = configureStore({
@@ -14,6 +15,7 @@ export const store = configureStore({
     decor: decorReducer,
     requests: requestReducer,
     payment: subscriptionReducer,
+    package: packageReducer,
   },
 });
 export const server = "https://event-bliss-backend.onrender.com/api/v1";

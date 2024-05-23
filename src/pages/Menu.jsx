@@ -11,7 +11,7 @@ const Menu = () => {
   const [active, setActive] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const { loading, error, message, menu } = useSelector((state) => state.menu);
-  
+
   useEffect(() => {
     dispatch(getAllMenu());
   }, [dispatch, error, message]);
@@ -23,7 +23,7 @@ const Menu = () => {
   return loading ? (
     <Loader />
   ) : (
-    <section className="flex_section">
+    <section className={`flex_section ${location.pathname === "/menu" ? "mt-[120px]" : ""}`}>
       <div className="content flex flex-col gap-5">
         <h2>Menu</h2>
         <div className="search">
@@ -33,6 +33,7 @@ const Menu = () => {
             value={searchTerm}
             onChange={handleSearch}
             onKeyUp={handleSearch}
+            className={`${location.pathname === "/cmenu" ? "bg-white" : ""}`}
           />
         </div>
         <div className="filter-row flex gap-2">
@@ -40,18 +41,22 @@ const Menu = () => {
             <PrimaryBtn
               key={index}
               title={f.label}
-              customStyling={
-                `border border-black min-w-[100px] h-[35px] hover:bg-crimson hover:text-white hover:border-none ${active === f.value ? "bg-crimson text-white border-none" : ""}`
-              }
+              customStyling={`border border-black min-w-[100px] h-[35px] hover:bg-crimson hover:text-white hover:border-none ${
+                active === f.value ? "bg-crimson text-white border-none" : ""
+              }`}
               handleClick={() => setActive(f.value)}
             />
           ))}
         </div>
 
-        <div className="food-row flex items-center gap-5 flex-wrap justify-between">
+        <div className="food-row flex items-center gap-5 flex-wrap justify-left mb-[80px]">
           {menu && menu.length > 0
             ? menu
-                .filter((f) => (active === "all" || f.category === active) && f.name.toLowerCase().includes(searchTerm.toLowerCase()))
+                .filter(
+                  (f) =>
+                    (active === "all" || f.category === active) &&
+                    f.name.toLowerCase().includes(searchTerm.toLowerCase())
+                )
                 .map((m, index) => (
                   <Food
                     key={index}
@@ -61,6 +66,7 @@ const Menu = () => {
                     price={`PKR ${m.price}`}
                     desc={m.description}
                     ratings={m.ratings}
+                    id={m._id}
                   />
                 ))
             : ""}

@@ -35,6 +35,8 @@ import ClientEvents from "./pages/ClientEvents";
 import AdminClients from "./pages/admin/AdminClients";
 import RequestDetail from "./pages/RequestDetail";
 import Cart from "./pages/Cart";
+import Packages from "./pages/admin/Packages";
+import CreatePackage from "./pages/admin/CreatePackage";
 const App = () => {
   const locomotiveScroll = new LocomotiveScroll();
   const { loading, isAuthenticated, error, message, user } = useSelector(
@@ -175,6 +177,27 @@ const App = () => {
         ></Route>
 
         <Route
+          path="/cmenu"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              redirect={"/login"}
+            >
+              <Sidebar
+                navList={
+                  isAuthenticated && user.role === "user"
+                    ? userRoutes
+                    : adminRoutes
+                }
+                component={Menu}
+                isAuthenticated={isAuthenticated}
+                user={user}
+              />
+            </ProtectedRoute>
+          }
+        ></Route>
+
+        <Route
           path="/cart"
           element={
             <ProtectedRoute
@@ -204,6 +227,46 @@ const App = () => {
               <Sidebar
                 navList={adminRoutes}
                 component={FoodItems}
+                isAuthenticated={isAuthenticated}
+                user={user}
+                adminRoute={true}
+                isAdmin={isAuthenticated && user.role === "admin"}
+                adminRedirect={"/profile"}
+              />
+            </ProtectedRoute>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/packages"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              redirect={"/login"}
+            >
+              <Sidebar
+                navList={adminRoutes}
+                component={Packages}
+                isAuthenticated={isAuthenticated}
+                user={user}
+                adminRoute={true}
+                isAdmin={isAuthenticated && user.role === "admin"}
+                adminRedirect={"/profile"}
+              />
+            </ProtectedRoute>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/package/create"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              redirect={"/login"}
+            >
+              <Sidebar
+                navList={adminRoutes}
+                component={CreatePackage}
                 isAuthenticated={isAuthenticated}
                 user={user}
                 adminRoute={true}

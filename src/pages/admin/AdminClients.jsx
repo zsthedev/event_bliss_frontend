@@ -21,6 +21,8 @@ const AdminClients = () => {
     dispatch(getAllUsers());
   }, [error, message]);
 
+  console.log(users);
+
   const [visibleRowId, setVisibleRowId] = useState(null);
 
   const clickHandler = (e) => {
@@ -40,6 +42,18 @@ const AdminClients = () => {
       dispatch({ type: "clearError" });
     }
   }, [error, message]);
+  
+  const vendors =
+    users && users.length > 0
+      ? users
+          .filter((u) => u.role === "vendor")
+          .map((u) => ({
+            value: u._id,
+            label: u.name,
+          }))
+      : "";
+
+
   return loading ? (
     <Loader />
   ) : (
@@ -53,6 +67,8 @@ const AdminClients = () => {
               <th>Date</th>
               <th>Event</th>
               <th>Decor</th>
+              <th>Number of Peoples</th>
+              <th>Cost</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
@@ -65,8 +81,10 @@ const AdminClients = () => {
                     <td>{r.date.split("T")[0]}</td>
                     <td>{r.event}</td>
                     <td>{r.decor}</td>
+                    <td>{r.numberOfPeople}</td>
+                    <td>{r.cost}</td>
                     <td>{r.status}</td>
-                    <td className="actions relative">
+                    <td className="actions">
                       {r.status === "fee_pending" ? (
                         ""
                       ) : (
@@ -84,7 +102,7 @@ const AdminClients = () => {
                           >
                             <Select
                               placeholder="Choose Vendor"
-                              options={vendorOptions(users)}
+                              options={vendors}
                               value={vendor}
                               onChange={setVendor}
                               defaultValue={vendor}

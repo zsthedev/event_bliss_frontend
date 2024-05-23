@@ -32,7 +32,7 @@ input {
 }
 
 .flex_section {
-  @apply w-full min-h-screen flex justify-center mt-[120px];
+  @apply w-full min-h-screen flex justify-center;
 }
 
 table {

@@ -54,6 +54,18 @@ export const menuReducer = createReducer(
       state.message = action.payload.message;
     },
 
+    getCartRequest: (state) => {
+      state.loading = true;
+    },
+    getCartSuccess: (state, action) => {
+      state.loading = false;
+      state.cart = action.payload;
+    },
+    getCartFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
     deleteFoodFail: (state, action) => {
       state.loading = false;
       state.error = action.payload;

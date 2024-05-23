@@ -50,10 +50,14 @@ export const eventOptions = (foods) => {
 };
 
 export const vendorOptions = (users) => {
-  return users
-    .filter((u) => u.role === "vendor")
-    .map((f) => ({
-      value: f._id,
-      label: f.name,
-    }));
+
+ 
+  users && users.length > 0
+    ? users
+        .filter((u) => u.role === "vendor")
+        .map((f) => ({
+          value: f._id,
+          label: f.name,
+        }))
+    : "";
 };
